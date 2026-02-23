@@ -10,8 +10,8 @@ const ArticlePage = () => {
 
   if (!article) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[hsl(var(--background))]">
-        <p className="text-[hsl(var(--muted-foreground))]">Article not found.</p>
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <p className="text-muted-foreground">Article not found.</p>
       </div>
     );
   }
@@ -20,11 +20,11 @@ const ArticlePage = () => {
   const paragraphs = article.fullSummary.split("\n\n");
 
   return (
-    <div className="min-h-screen bg-[hsl(var(--background))]">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-[hsl(var(--border))] bg-[hsl(var(--background))]/80 backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
-          <Link to="/" className="flex items-center gap-2 text-sm text-emerald-500 hover:text-emerald-400 transition-colors">
+          <Link to="/" className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors">
             <ArrowLeft size={16} />
             Back to News
           </Link>
@@ -35,22 +35,22 @@ const ArticlePage = () => {
         {/* Thumbnail */}
         <div className="relative mb-6 overflow-hidden rounded-xl">
           <img src={article.thumbnail} alt={article.title} className="h-72 w-full object-cover sm:h-96" />
-          <span className="absolute left-4 top-4 rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+          <span className="absolute left-4 top-4 rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-primary-foreground backdrop-blur-sm">
             {article.category}
           </span>
         </div>
 
         {/* Title */}
-        <h1 className="mb-4 text-2xl font-bold leading-tight text-[hsl(var(--foreground))] sm:text-3xl">
+        <h1 className="mb-4 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
           {article.title}
         </h1>
 
         {/* Meta */}
-        <div className="mb-8 flex items-center gap-3 border-b border-[hsl(var(--border))] pb-6">
+        <div className="mb-8 flex items-center gap-3 border-b border-border pb-6">
           <img src={article.publisherLogo} alt={article.publisher} className="h-8 w-8 rounded-full" />
           <div>
-            <p className="text-sm font-medium text-[hsl(var(--foreground))]">{article.publisher}</p>
-            <p className="text-xs text-[hsl(var(--muted-foreground))]">
+            <p className="text-sm font-medium text-foreground">{article.publisher}</p>
+            <p className="text-xs text-muted-foreground">
               By {article.author} · {timeAgo}
             </p>
           </div>
@@ -59,7 +59,7 @@ const ArticlePage = () => {
         {/* Summary paragraphs */}
         <div className="mb-8 space-y-4">
           {paragraphs.map((p, i) => (
-            <p key={i} className="text-base leading-relaxed text-[hsl(var(--muted-foreground))]">
+            <p key={i} className="text-base leading-relaxed text-muted-foreground">
               {p}
             </p>
           ))}
@@ -70,7 +70,7 @@ const ArticlePage = () => {
           href={article.externalUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-emerald-600"
+          className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
         >
           Read Full Article
           <ExternalLink size={16} />
