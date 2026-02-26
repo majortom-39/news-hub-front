@@ -3,6 +3,7 @@ import { formatDistanceToNow } from "date-fns";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { articles } from "@/data/articles";
 import ChatBot from "@/components/ChatBot";
+import { motion } from "framer-motion";
 
 const ArticlePage = () => {
   const { id } = useParams();
@@ -22,20 +23,26 @@ const ArticlePage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
-          <Link to="/" className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors">
+      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-3xl items-center gap-3 px-5 py-4">
+          <Link to="/" className="flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80">
             <ArrowLeft size={16} />
-            Back to News
+            Back
           </Link>
         </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-4 py-8">
+      <motion.main
+        className="mx-auto max-w-3xl px-5 py-8"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
         {/* Thumbnail */}
-        <div className="relative mb-6 overflow-hidden rounded-xl">
-          <img src={article.thumbnail} alt={article.title} className="h-72 w-full object-cover sm:h-96" />
-          <span className="absolute left-4 top-4 rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-primary-foreground backdrop-blur-sm">
+        <div className="relative mb-8 overflow-hidden rounded-2xl">
+          <img src={article.thumbnail} alt={article.title} className="h-64 w-full object-cover sm:h-80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+          <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground">
             {article.category}
           </span>
         </div>
@@ -46,7 +53,7 @@ const ArticlePage = () => {
         </h1>
 
         {/* Meta */}
-        <div className="mb-8 flex items-center gap-3 border-b border-border pb-6">
+        <div className="mb-8 flex items-center gap-3 border-b border-border/60 pb-6">
           <img src={article.publisherLogo} alt={article.publisher} className="h-8 w-8 rounded-full" />
           <div>
             <p className="text-sm font-medium text-foreground">{article.publisher}</p>
@@ -57,9 +64,9 @@ const ArticlePage = () => {
         </div>
 
         {/* Summary paragraphs */}
-        <div className="mb-8 space-y-4">
+        <div className="mb-10 space-y-5">
           {paragraphs.map((p, i) => (
-            <p key={i} className="text-base leading-relaxed text-muted-foreground">
+            <p key={i} className="text-[15px] leading-relaxed text-muted-foreground">
               {p}
             </p>
           ))}
@@ -70,12 +77,12 @@ const ArticlePage = () => {
           href={article.externalUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+          className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/25 hover:brightness-110"
         >
           Read Full Article
-          <ExternalLink size={16} />
+          <ExternalLink size={15} />
         </a>
-      </main>
+      </motion.main>
 
       <ChatBot articleTitle={article.title} />
     </div>
